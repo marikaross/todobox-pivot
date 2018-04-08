@@ -2,10 +2,11 @@ $('.save-button').on('click', createTask);
 $('.todo-title-input').on('keyup', btnDisable);
 $('.todo-task-input').on('keyup', btnDisable);
 $('.bottom-section').on('click', '.delete-button', deleteCard);
-$('.bottom-section').on('blur', '.todo-title-output', editTitle);
+$('.bottom-section').on('keydown', '.todo-title-output', editTitle);
 $('.bottom-section').on('blur', '.todo-task-output', editTask);
 $('.bottom-section').on('click', '.upvote-button', increaseQuality);
 $('.bottom-section').on('click', '.downvote-button', decreaseQuality);
+$('.filter-input').on('keyup', filterTasks);
 
 function btnDisable() {
   if ($('.todo-title-input').val() === "" || $('.todo-task-input').val() ==="") {
@@ -60,21 +61,6 @@ function storeTask(card) {
   localStorage.setItem(card.id, stringifyCard);
 }
 
-function editTitle() {
-  var currentCard = $(this).closest('.todo-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.title = $(this).text();
-  storeTask(parsedCard);
-}
-
-function editTask() {
-  var currentCard = $(this).closest('.todo-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.task = $(this).text();
-  storeTask(parsedCard);
-}
 
 function storeQuality(cardId, qualityValue) {
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
@@ -119,4 +105,29 @@ function deleteCard() {
   var cardId = deleteCard.attr('id');
   deleteCard.remove();
   localStorage.removeItem(cardId);
+}
+
+function editTitle(e) {
+  if (e.keycode === 13); {
+  var currentCard = $(this).closest('.todo-card');
+  var cardId = currentCard.attr('id');
+  var parsedCard = JSON.parse(localStorage.getItem(cardId));
+  parsedCard.title = $(this).text();
+  storeTask(parsedCard);
+}
+}
+
+function editTask() {
+  var currentCard = $(this).closest('.todo-card');
+  var cardId = currentCard.attr('id');
+  var parsedCard = JSON.parse(localStorage.getItem(cardId));
+  parsedCard.task = $(this).text();
+  storeTask(parsedCard);
+}
+
+function filterTasks() {
+  $("article:contains('"+ $('.filter-input').val() +"')").show();
+  $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
+  $("article:contains('"+ $('.filter-input').val() +"')").show();
+  $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
 }
