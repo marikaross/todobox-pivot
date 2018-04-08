@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head>
- <link rel="stylesheet" type="text/css" href="styles.css">
- <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:700" rel="stylesheet">
- <title>Idea Box</title>
-</head>
-<body>
-<section class="top-section">
-  <header>
-   <span><h1>idea</h1>box</span>
- </header>
-   <input aria-label="title" class='inputs title-input' placeholder="Title" type="text">
-   <input aria-label='body' class='inputs body-input' placeholder="Body" type='text'>
-   <button class='save-button'>save</button>
- </section>
-<section class='middle-section'>
-    <input aria-label='search' class='inputs search-input' placeholder="Search" type='text'>
-</section>
-<section class='bottom-section'>
-<footer></footer>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script type="text/javascript" src='scripts.js'></script>
-</body>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" type="icon/png" href="icons/Checkmark.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:700" rel="stylesheet">
+   <title>To-Do Box</title>
+  </head>
+  <body>
+    <section class="top-section">
+      <header><h1>2Do<span>Box</span></h1></header>
+      <form>
+       <input aria-label="enter new to-do title" class="inputs todo-title-input" placeholder="ToDo Title" type="text">
+       <input aria-label="enter new to-do task" class="inputs todo-task-input" placeholder="ToDo Task" type="text">
+       <button aria-label="submit button" class="save-button">save</button>
+      </form>
+    </section>
+      <input aria-label="filter current tasks" class="inputs filter-input" placeholder="Filter" type="text">
+    <section class="bottom-section">
+    </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts.js"></script>
+  </body>
 </html>
 
