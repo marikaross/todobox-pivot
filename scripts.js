@@ -10,7 +10,6 @@ $('.bottom-section').on('click', '.downvote-button', decreaseQuality);
 function btnDisable() {
   if ($('.todo-title-input').val() === "" || $('.todo-task-input').val() ==="") {
     $('.save-button').prop('disabled', true);
-    debugger;
   } else if ($('.todo-title-input').val() && $('.todo-task-input').val()) {
     $('.save-button').prop('disabled', false);
   }
@@ -39,7 +38,7 @@ function Card(title, task) {
   this.title = title;
   this.task = task;
   this.id = Date.now();
-  this.importance = 'swill';
+  this.importance = 'Normal';
 }
 
 function prependTask(card) {
@@ -50,8 +49,7 @@ function prependTask(card) {
       <p class="todo-task-output" contenteditable>${card.task}</p>
       <img src="icons/upvote.svg" class="voters upvote-button">
       <img src="icons/downvote.svg" class="voters downvote-button">
-      <h3>importance: </h3>
-      <h3 class="importance"> ${card.importance}</h3>
+      <h3>importance:</h3><h3 class="importance"> ${card.importance}</h3>
       <hr>
     </article>
   `);
@@ -85,31 +83,34 @@ function storeQuality(cardId, qualityValue) {
 }
 
 function increaseQuality() {
-  var upQualityID = $(this).parent().find('.importance');
-  var cardId = upQualityID.parent().attr('id');
-   console.log(upQualityID.text())
-   if (upQualityID.text() === 'none') {
-    upQualityID.text('low');
-  } else if (upQualityID.text() === 'low') { 
-      upQualityID.text('normal');
-  } else if (upQualityID.text() === 'normal') { 
-      upQualityID.text('high');
-  } else if (upQualityID.text() === 'high') { 
-      upQualityID.text('critical');
+  var cardId = $(this).parent().attr('id');
+  var upQualityID = $(this).siblings('.importance'); 
+   if (upQualityID.text() === 'Normal') { 
+      upQualityID.text('High');
+  } else if (upQualityID.text() === 'High') {
+    upQualityID.text('Critical');
+  } else if (upQualityID.text() === 'None') { 
+    upQualityID.text('Low');
+  } else if (upQualityID.text() === 'Low') {
+    upQualityID.text('Normal');
+  } else { 
+    upQualityID.text('Critical');
   } storeQuality(cardId, upQualityID.text())
 }
 
 function decreaseQuality() {
-  var downQualityID = $(this).parent().find('.importance');
-  var cardId = downQualityID.parent().attr('id');
-    if (downQualityID.text() === 'critical') {
-      downQualityID.text('high');
-    } else if (downQualityID.text() === 'high') {
-      downQualityID.text('normal');
-    } else if (downQualityID.text() === 'normal') {
-      downQualityID.text('low');
+  var cardId = $(this).parent().attr('id');
+  var downQualityID = $(this).siblings('.importance');
+    if (downQualityID.text() === 'Normal') {
+      downQualityID.text('Low');
+    } else if (downQualityID.text() === 'Low') {
+      downQualityID.text('None');
+    } else if (downQualityID.text() === 'Critical') {
+      downQualityID.text('High');
+    } else if (downQualityID.text() === 'High') {
+      downQualityID.text('Normal');
     } else {
-      downQualityID.text('none');
+      downQualityID.text('None');
     } storeQuality(cardId, downQualityID.text());
 }
 
