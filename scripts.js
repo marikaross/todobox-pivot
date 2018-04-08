@@ -1,28 +1,28 @@
-$titleInput = $('.todo-title-input');
-$taskInput = $('.todo-task-input');
-$saveBtn = $('.save-button');
-$topSection = $('.top-section');
-$bottomSection = $('.bottom-section');
-$filterInput = $('.filter-input');
-$deleteBtn = $('.delete-button');
-$upvoteBtn = $('.upvote-button')
-$downvoteBtn = $('.downvote-button')
-$titleOutput = $('.todo-title-output');
+$('.save-button').on('click', createTask);
+$('.todo-title-input').on('keyup', btnDisable);
+$('.todo-task-input').on('keyup', btnDisable);
+$('.bottom-section').on('click', '.delete-button', deleteCard);
+$('.bottom-section').on('blur', '.todo-title-output', editTitle);
+$('.bottom-section').on('blur', '.todo-task-output', editTask);
+$('.bottom-section').on('click', '.upvote-button', increaseQuality);
+$('.bottom-section').on('click', '.downvote-button', decreaseQuality);
 
-$saveBtn.on('click', createTask);
-$bottomSection.on('click', '.delete-button', deleteCard);
-$bottomSection.on('blur', '.todo-title-output', editTitle);
-$bottomSection.on('blur', '.todo-task-output', editTask);
-$bottomSection.on('click', '.upvote-button', increaseQuality);
-$bottomSection.on('click', '.downvote-button', decreaseQuality);
+function btnDisable() {
+  if ($('.todo-title-input').val() === "" || $('.todo-task-input').val() ==="") {
+    $('.save-button').prop('disabled', true);
+    debugger;
+  } else if ($('.todo-title-input').val() && $('.todo-task-input').val()) {
+    $('.save-button').prop('disabled', false);
+  }
+}
 
 function createTask(event) {
   event.preventDefault();
-  var card = new Card($titleInput.val(), $taskInput.val());
+  var card = new Card($('.todo-title-input').val(), $('.todo-task-input').val());
   prependTask(card);
   storeTask(card);
-  $('.title-input').val('');
-  $('.task-input').val('');
+  $('.todo-title-input').val('');
+  $('.todo-task-input').val('');
 }
 
 function getTasks() {
@@ -39,11 +39,11 @@ function Card(title, task) {
   this.title = title;
   this.task = task;
   this.id = Date.now();
-  this.importance = 'Normal';
+  this.importance = 'swill';
 }
 
 function prependTask(card) {
-  $bottomSection.prepend(`
+  $('.bottom-section').prepend(`
     <article class="todo-card" id=${card.id}>
       <img src="icons/delete.svg" class="delete-button">
       <h2 class="todo-title-output" contenteditable>${card.title}</h2>
@@ -87,24 +87,30 @@ function storeQuality(cardId, qualityValue) {
 function increaseQuality() {
   var upQualityID = $(this).parent().find('.importance');
   var cardId = upQualityID.parent().attr('id');
-   if (upQualityID.text() === 'Normal') { 
-      upQualityID.text() = 'high';
    console.log(upQualityID.text())
+   if (upQualityID.text() === 'none') {
+    upQualityID.text('low');
+  } else if (upQualityID.text() === 'low') { 
+      upQualityID.text('normal');
+  } else if (upQualityID.text() === 'normal') { 
+      upQualityID.text('high');
   } else if (upQualityID.text() === 'high') { 
       upQualityID.text('critical');
-  } 
-  storeQuality(cardId, upQualityID.text())
+  } storeQuality(cardId, upQualityID.text())
 }
 
 function decreaseQuality() {
   var downQualityID = $(this).parent().find('.importance');
   var cardId = downQualityID.parent().attr('id');
-    if (downQualityID.text() === ' normal') {
+    if (downQualityID.text() === 'critical') {
+      downQualityID.text('high');
+    } else if (downQualityID.text() === 'high') {
+      downQualityID.text('normal');
+    } else if (downQualityID.text() === 'normal') {
       downQualityID.text('low');
-    } else if (downQualityID.text() ===' low'){
+    } else {
       downQualityID.text('none');
-    }
-    storeQuality(cardId, downQualityID.text());
+    } storeQuality(cardId, downQualityID.text());
 }
 
 function deleteCard() {
