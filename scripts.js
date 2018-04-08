@@ -16,7 +16,8 @@ $bottomSection.on('blur', '.todo-task-output', editTask);
 $bottomSection.on('click', '.upvote-button', increaseQuality);
 $bottomSection.on('click', '.downvote-button', decreaseQuality);
 
-function createTask() {
+function createTask(event) {
+  event.preventDefault();
   var card = new Card($titleInput.val(), $taskInput.val());
   prependTask(card);
   storeTask(card);
@@ -38,7 +39,7 @@ function Card(title, task) {
   this.title = title;
   this.task = task;
   this.id = Date.now();
-  this.importance = 'swill';
+  this.importance = 'Normal';
 }
 
 function prependTask(card) {
@@ -86,30 +87,24 @@ function storeQuality(cardId, qualityValue) {
 function increaseQuality() {
   var upQualityID = $(this).parent().find('.importance');
   var cardId = upQualityID.parent().attr('id');
+   if (upQualityID.text() === 'Normal') { 
+      upQualityID.text() = 'high';
    console.log(upQualityID.text())
-   if (upQualityID.text() === 'none') {
-    upQualityID.text('low');
-  } else if (upQualityID.text() === 'low') { 
-      upQualityID.text('normal');
-  } else if (upQualityID.text() === 'normal') { 
-      upQualityID.text('high');
   } else if (upQualityID.text() === 'high') { 
       upQualityID.text('critical');
-  } storeQuality(cardId, upQualityID.text())
+  } 
+  storeQuality(cardId, upQualityID.text())
 }
 
 function decreaseQuality() {
   var downQualityID = $(this).parent().find('.importance');
   var cardId = downQualityID.parent().attr('id');
-    if (downQualityID.text() === 'critical') {
-      downQualityID.text('high');
-    } else if (downQualityID.text() === 'high') {
-      downQualityID.text('normal');
-    } else if (downQualityID.text() === 'normal') {
+    if (downQualityID.text() === ' normal') {
       downQualityID.text('low');
-    } else {
+    } else if (downQualityID.text() ===' low'){
       downQualityID.text('none');
-    } storeQuality(cardId, downQualityID.text());
+    }
+    storeQuality(cardId, downQualityID.text());
 }
 
 function deleteCard() {
