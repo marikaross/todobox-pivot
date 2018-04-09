@@ -3,9 +3,9 @@ $('.todo-title-input').on('keyup', btnDisable);
 $('.todo-task-input').on('keyup', btnDisable);
 $('.bottom-section').on('click', '.delete-button', deleteCard);
 $('.bottom-section').on('keydown', '.todo-title-output', editTitle);
-$('.bottom-section').on('blur', '.todo-task-output', editTask);
-$('.bottom-section').on('click', '.upvote-button', increaseQuality);
-$('.bottom-section').on('click', '.downvote-button', decreaseQuality);
+$('.bottom-section').on('keydown', '.todo-task-output', editTask);
+$('.bottom-section').on('click', '.upvote-button', increaseImportance);
+$('.bottom-section').on('click', '.downvote-button', decreaseImportance);
 $('.filter-input').on('keyup', filterTasks);
 $('.bottom-section').on('click', '.completed-task', strikeThrough);
 
@@ -64,42 +64,42 @@ function storeTask(card) {
 }
 
 
-function storeQuality(cardId, qualityValue) {
+function storeImportance(cardId, importanceValue) {
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.importance = qualityValue;
+  parsedCard.importance = importanceValue;
   storeTask(parsedCard);
 }
 
-function increaseQuality() {
+function increaseImportance() {
   var cardId = $(this).parent().attr('id');
-  var upQualityID = $(this).siblings('.importance'); 
-   if (upQualityID.text() === 'Normal') { 
-      upQualityID.text('High');
-  } else if (upQualityID.text() === 'High') {
-    upQualityID.text('Critical');
-  } else if (upQualityID.text() === 'None') { 
-    upQualityID.text('Low');
-  } else if (upQualityID.text() === 'Low') {
-    upQualityID.text('Normal');
+  var upImportanceId = $(this).siblings('.importance'); 
+   if (upImportanceId.text() === 'Normal') { 
+      upImportanceId.text('High');
+  } else if (upImportanceId.text() === 'High') {
+    upImportanceId.text('Critical');
+  } else if (upImportanceId.text() === 'None') { 
+    upImportanceId.text('Low');
+  } else if (upImportanceId.text() === 'Low') {
+    upImportanceId.text('Normal');
   } else { 
-    upQualityID.text('Critical');
-  } storeQuality(cardId, upQualityID.text())
+    upImportanceId.text('Critical');
+  } storeImportance(cardId, upImportanceId.text())
 }
 
-function decreaseQuality() {
+function decreaseImportance() {
   var cardId = $(this).parent().attr('id');
-  var downQualityID = $(this).siblings('.importance');
-    if (downQualityID.text() === 'Normal') {
-      downQualityID.text('Low');
-    } else if (downQualityID.text() === 'Low') {
-      downQualityID.text('None');
-    } else if (downQualityID.text() === 'Critical') {
-      downQualityID.text('High');
-    } else if (downQualityID.text() === 'High') {
-      downQualityID.text('Normal');
+  var downImportanceId = $(this).siblings('.importance');
+    if (downImportanceId.text() === 'Normal') {
+      downImportanceId.text('Low');
+    } else if (downImportanceId.text() === 'Low') {
+      downImportanceId.text('None');
+    } else if (downImportanceId.text() === 'Critical') {
+      downImportanceId.text('High');
+    } else if (downImportanceId.text() === 'High') {
+      downImportanceId.text('Normal');
     } else {
-      downQualityID.text('None');
-    } storeQuality(cardId, downQualityID.text());
+      downImportanceId.text('None');
+    } storeImportance(cardId, downImportanceId.text());
 }
 
 function deleteCard() {
@@ -110,30 +110,31 @@ function deleteCard() {
 }
 
 function editTitle(e) {
-  if (e.keycode === 13); {
-  var currentCard = $(this).closest('.todo-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.title = $(this).text();
-  storeTask(parsedCard);
-}
+  if (e.which === 13) { 
+    $('.todo-card').children('.todo-task-output').focus();
+  }
+    var currentCard = $(this).closest('.todo-card');
+    var cardId = currentCard.attr('id');
+    var parsedCard = JSON.parse(localStorage.getItem(cardId));
+    parsedCard.title = $(this).text();
+    storeTask(parsedCard);
 }
 
-function editTask() {
-  var currentCard = $(this).closest('.todo-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.task = $(this).text();
-  storeTask(parsedCard);
+function editTask(e) {
+  if (e.which === 13) { 
+    $('.todo-card').children('.todo-title-output').focus();
+  }
+    var currentCard = $(this).closest('.todo-card');
+    var cardId = currentCard.attr('id');
+    var parsedCard = JSON.parse(localStorage.getItem(cardId));
+    parsedCard.task = $(this).text();
+    storeTask(parsedCard);
 }
 
 function strikeThrough() {
   console.log('almost done');
-  var backgroundColor = $(this).parent('article').css('background-color', '#E5F3F2');
-  if (this).prop('style', false) {
-    backgroundColor;
+  $(this).parent('article').toggleClass('card-complete');
   }
-}
 
 function filterTasks() {
   $("article:contains('"+ $('.filter-input').val() +"')").show();
