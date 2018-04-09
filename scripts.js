@@ -2,10 +2,12 @@ $('.save-button').on('click', createTask);
 $('.todo-title-input').on('keyup', btnDisable);
 $('.todo-task-input').on('keyup', btnDisable);
 $('.bottom-section').on('click', '.delete-button', deleteCard);
-$('.bottom-section').on('blur', '.todo-title-output', editTitle);
+$('.bottom-section').on('keydown', '.todo-title-output', editTitle);
 $('.bottom-section').on('blur', '.todo-task-output', editTask);
 $('.bottom-section').on('click', '.upvote-button', increaseQuality);
 $('.bottom-section').on('click', '.downvote-button', decreaseQuality);
+$('.filter-input').on('keyup', filterTasks);
+$('.bottom-section').on('click', '.completed-task', strikeThrough);
 
 function btnDisable() {
   if ($('.todo-title-input').val() === "" || $('.todo-task-input').val() ==="") {
@@ -44,12 +46,13 @@ function Card(title, task) {
 function prependTask(card) {
   $('.bottom-section').prepend(`
     <article class="todo-card" id=${card.id}>
-      <img src="icons/delete.svg" class="delete-button">
+      <img src="icons/delete.svg" class="delete-button" alt="delete task button">
       <h2 class="todo-title-output" contenteditable>${card.title}</h2>
       <p class="todo-task-output" contenteditable>${card.task}</p>
-      <img src="icons/upvote.svg" class="voters upvote-button">
-      <img src="icons/downvote.svg" class="voters downvote-button">
+      <img src="icons/upvote.svg" class="voters upvote-button" alt="level of importance upvote button">
+      <img src="icons/downvote.svg" class="voters downvote-button" alt="level of importance down vote button">
       <h3>importance:</h3><h3 class="importance"> ${card.importance}</h3>
+      <button type="submit" aria-label="completed task button" class="completed-task">Completed Task</button>
       <hr>
     </article>
   `);
@@ -60,21 +63,6 @@ function storeTask(card) {
   localStorage.setItem(card.id, stringifyCard);
 }
 
-function editTitle() {
-  var currentCard = $(this).closest('.todo-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.title = $(this).text();
-  storeTask(parsedCard);
-}
-
-function editTask() {
-  var currentCard = $(this).closest('.todo-card');
-  var cardId = currentCard.attr('id');
-  var parsedCard = JSON.parse(localStorage.getItem(cardId));
-  parsedCard.task = $(this).text();
-  storeTask(parsedCard);
-}
 
 function storeQuality(cardId, qualityValue) {
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
@@ -119,4 +107,37 @@ function deleteCard() {
   var cardId = deleteCard.attr('id');
   deleteCard.remove();
   localStorage.removeItem(cardId);
+}
+
+function editTitle(e) {
+  if (e.keycode === 13); {
+  var currentCard = $(this).closest('.todo-card');
+  var cardId = currentCard.attr('id');
+  var parsedCard = JSON.parse(localStorage.getItem(cardId));
+  parsedCard.title = $(this).text();
+  storeTask(parsedCard);
+}
+}
+
+function editTask() {
+  var currentCard = $(this).closest('.todo-card');
+  var cardId = currentCard.attr('id');
+  var parsedCard = JSON.parse(localStorage.getItem(cardId));
+  parsedCard.task = $(this).text();
+  storeTask(parsedCard);
+}
+
+function strikeThrough() {
+  console.log('almost done');
+  var backgroundColor = $(this).parent('article').css('background-color', '#E5F3F2');
+  if (this).prop('style', false) {
+    backgroundColor;
+  }
+}
+
+function filterTasks() {
+  $("article:contains('"+ $('.filter-input').val() +"')").show();
+  $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
+  $("article:contains('"+ $('.filter-input').val() +"')").show();
+  $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
 }

@@ -69,8 +69,8 @@ form{
   margin: 1rem auto;
 }
 
-.todo-card {
-  margin: 1rem auto;
+article {
+  margin: 1rem auto 2rem auto;
   width: 50%;
   height: 11rem;
 }
@@ -79,6 +79,9 @@ h2 {
   font-family: 'Roboto Slab', serif;
   color: #6D6E71;
   font-size: larger;
+  overflow: scroll;
+  width: 90%;
+  height: 2rem;
 }
 
 p {
@@ -123,6 +126,19 @@ article img {
   content: url('icons/downvote-hover.svg');
 }
 
+.completed-task {
+  border: none;
+  background-color: #00A79D;
+  border-radius: 1rem;
+  color: #FFFFFF; 
+  float: right;
+  padding: .25rem;
+}
+
+.card-complete {
+  background-color: #E5F3F2; 
+}
+
 @media screen and (max-width: 950px) {
 
 form {
@@ -137,7 +153,7 @@ form {
   width: 65%;
 }
 
-.todo-card {
+article {
   width: 65%;
 }
 }
@@ -156,7 +172,7 @@ form {
   width: 80%;
 }
 
-.todo-card {
+article {
   width: 80%;
 }
 }
@@ -175,7 +191,7 @@ form {
   width: 80%;
 }
 
-.todo-card {
+article {
   width: 80%;
 }
 }
