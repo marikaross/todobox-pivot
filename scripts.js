@@ -8,6 +8,8 @@ $('.bottom-section').on('click', '.upvote-button', increaseImportance);
 $('.bottom-section').on('click', '.downvote-button', decreaseImportance);
 $('.filter-input').on('keyup', filterTasks);
 $('.bottom-section').on('click', '.completed-task', strikeThrough);
+$('.show-completed').on('click', getCompletedTasks);
+
 
 function btnDisable() {
   if ($('.todo-title-input').val() === "" || $('.todo-task-input').val() ==="") {
@@ -30,7 +32,18 @@ function getTasks() {
   for (var i=0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored);
-    prependTask(parsedCard);
+    console.log(parsedCard)
+    if (parsedCard.checked === false) {
+      prependTask(parsedCard);
+      }
+  }
+};
+
+function getCompletedTasks() {
+  for (var i=0; i < localStorage.length; i++) {
+    var stored = localStorage.getItem(localStorage.key(i))
+    var parsedCard = JSON.parse(stored); 
+      prependTask(parsedCard);
   }
 };
 
@@ -41,6 +54,7 @@ function Card(title, task) {
   this.task = task;
   this.id = Date.now();
   this.importance = 'Normal';
+  this.checked = false;
 }
 
 function prependTask(card) {
@@ -111,7 +125,8 @@ function deleteCard() {
 
 function editTitle(e) {
   if (e.which === 13) { 
-    $('.todo-card').children('.todo-task-output').focus();
+    e.preventDefault();
+    $('.todo-title-input').focus();
   }
     var currentCard = $(this).closest('.todo-card');
     var cardId = currentCard.attr('id');
@@ -122,7 +137,8 @@ function editTitle(e) {
 
 function editTask(e) {
   if (e.which === 13) { 
-    $('.todo-card').children('.todo-title-output').focus();
+    e.preventDefault();
+    $('.todo-title-input').focus();
   }
     var currentCard = $(this).closest('.todo-card');
     var cardId = currentCard.attr('id');
@@ -132,8 +148,12 @@ function editTask(e) {
 }
 
 function strikeThrough() {
-  console.log('almost done');
   $(this).parent('article').toggleClass('card-complete');
+  var cardId = $(this).parent().attr('id');
+  var parsedCard = JSON.parse(localStorage.getItem(cardId));
+  parsedCard.checked = !parsedCard.checked;
+  storeTask(parsedCard);
+
   }
 
 function filterTasks() {
