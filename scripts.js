@@ -43,7 +43,9 @@ function getCompletedTasks() {
   for (var i=0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored); 
-      prependTask(parsedCard);
+    if (parsedCard.checked) {
+      prependTask(parsedCard, 'card-complete');
+    } 
   }
 };
 
@@ -57,9 +59,9 @@ function Card(title, task) {
   this.checked = false;
 }
 
-function prependTask(card) {
+function prependTask(card, completed) {
   $('.bottom-section').prepend(`
-    <article class="todo-card" id=${card.id}>
+    <article class="todo-card ${completed}" id=${card.id}>
       <img src="icons/delete.svg" class="delete-button" alt="delete task button">
       <h2 class="todo-title-output" contenteditable>${card.title}</h2>
       <p class="todo-task-output" contenteditable>${card.task}</p>
