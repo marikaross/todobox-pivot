@@ -67,7 +67,7 @@ function prependTask(card, completed) {
       <p class="todo-task-output" contenteditable>${card.task}</p>
       <img src="icons/upvote.svg" class="voters upvote-button" alt="level of importance upvote button">
       <img src="icons/downvote.svg" class="voters downvote-button" alt="level of importance down vote button">
-      <h3>importance:</h3><h3 class="importance"> ${card.importance}</h3>
+      <h3>importance:</h3><h3 class="importance">${card.importance}</h3>
       <button type="submit" aria-label="completed task button" class="completed-task">Completed Task</button>
       <hr>
     </article>
@@ -89,33 +89,31 @@ function storeImportance(cardId, importanceValue) {
 function increaseImportance() {
   var cardId = $(this).parent().attr('id');
   var upImportanceId = $(this).siblings('.importance'); 
-   if (upImportanceId.text() === 'Normal') { 
-      upImportanceId.text('High');
-  } else if (upImportanceId.text() === 'High') {
-    upImportanceId.text('Critical');
-  } else if (upImportanceId.text() === 'None') { 
-    upImportanceId.text('Low');
+   if (upImportanceId.text() === 'None') { 
+      upImportanceId.text('Low');
   } else if (upImportanceId.text() === 'Low') {
     upImportanceId.text('Normal');
-  } else { 
+  } else if (upImportanceId.text() === 'Normal') { 
+    upImportanceId.text('High');
+  } else if (upImportanceId.text() === 'High') {
     upImportanceId.text('Critical');
-  } storeImportance(cardId, upImportanceId.text())
+  }  
+  storeImportance(cardId, upImportanceId.text())
 }
 
 function decreaseImportance() {
   var cardId = $(this).parent().attr('id');
   var downImportanceId = $(this).siblings('.importance');
-    if (downImportanceId.text() === 'Normal') {
-      downImportanceId.text('Low');
-    } else if (downImportanceId.text() === 'Low') {
-      downImportanceId.text('None');
-    } else if (downImportanceId.text() === 'Critical') {
+    if (downImportanceId.text() === 'Critical') {
       downImportanceId.text('High');
     } else if (downImportanceId.text() === 'High') {
       downImportanceId.text('Normal');
-    } else {
+    } else if (downImportanceId.text() === 'Normal') {
+      downImportanceId.text('Low');
+    } else if (downImportanceId.text() === 'Low') {
       downImportanceId.text('None');
-    } storeImportance(cardId, downImportanceId.text());
+    } 
+    storeImportance(cardId, downImportanceId.text());
 }
 
 function deleteCard() {

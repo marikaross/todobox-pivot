@@ -95,11 +95,29 @@ h3 {
   display: inline-block;
   font-family: 'Roboto Slab', serif;
   color: #939598;
+  padding-left: .5rem;
 }
 
 .importance {
   font-family: 'Open Sans', sans-serif;
 }
+
+.show-completed,
+.show-more-ToDos {
+  margin: 0 auto;
+  width: 12rem; 
+  background-color: #00A79D;
+  color: #FFFFFF;
+  font-size: 1rem;
+  display: block;
+  position: relative;
+}
+
+.show-completed:hover,
+.show-more-ToDos:hover {
+  background-color: #045E55;
+}
+
 
 article img {
   width: 1.75rem; 
