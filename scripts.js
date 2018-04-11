@@ -24,22 +24,24 @@ function createTask(event) {
   var card = new Card($('.todo-title-input').val(), $('.todo-task-input').val());
   prependTask(card);
   storeTask(card);
+  showTenCards();
   $('.todo-title-input').val('');
   $('.todo-task-input').val('');
 }
 
 function getTasks() {
-  for (var i=0; i < localStorage.length; i++) {
+  for (var i = 0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored);
     if (parsedCard.checked === false) {
       prependTask(parsedCard);
       }
-  }
+  } 
+  showTenCards();
 };
 
 function getCompletedTasks() {
-  for (var i=0; i < localStorage.length; i++) {
+  for (var i = 0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored); 
     if (parsedCard.checked) {
@@ -163,7 +165,16 @@ function filterTasks() {
 }
 
 
+function showTenCards() {
+  var allTheCards = $('article');
+  for (var i = 0; i < allTheCards.length; i++) {
+    if (i > 9) {
+      $(allTheCards[i]).hide();
+    }
+  }
+}
 
+// localStorage is an ar
 // function display( divs ) {
 //   var a = [];
 //   for ( var i = 0; i < divs.length; i++ ) {
