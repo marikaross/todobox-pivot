@@ -32,7 +32,6 @@ function getTasks() {
   for (var i=0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored);
-    console.log(parsedCard)
     if (parsedCard.checked === false) {
       prependTask(parsedCard);
       }
@@ -162,3 +161,29 @@ function filterTasks() {
   $("article:contains('"+ $('.filter-input').val() +"')").show();
   $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
 }
+
+
+
+// function display( divs ) {
+//   var a = [];
+//   for ( var i = 0; i < divs.length; i++ ) {
+//     a.push( divs[ i ].innerHTML );
+//   }
+//   $( "span" ).text( a.join(" ") );
+// }
+// display( $( "div" ).get().reverse() );
+
+
+
+// if on page load the objectsin storage.lengthis > 10, parse
+// most recent 10 
+
+
+
+// if new card the objects in storage . length is < 10,  parse all
+// if new card the objectsin storage.length is > 10, parse up to 9
+
+
+
+
+
