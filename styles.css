@@ -1,3 +1,5 @@
+/*---------BLANKET PAGE STYLINGS------------*/
+
 body {
   padding: 0 auto;
 }
@@ -15,7 +17,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
 }
-
+/*----------------FORM FIELD STYLINGS----------*/
 header {
   color: #6D6E71;
   text-align: center;
@@ -69,6 +71,51 @@ form{
   margin: 1rem auto;
 }
 
+/*-------------EXTRA BUTTON STYLINGS--------*/
+
+.importance {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.box-filter-importances, 
+.box-complete-extra-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem auto;
+  height: 2rem;
+  width: 50%;
+}
+
+.show-completed,
+.show-more-ToDos {
+  height: 2rem;
+  width: 12rem; 
+  background-color: #00A79D;
+  color: #FFFFFF;
+  font-size: 1rem;
+  border: none;
+}
+
+.show-completed:hover,
+.show-more-ToDos:hover {
+  background-color: #045E55;
+}
+
+.box-filter-importances button {
+  background-color: #E5F3F2;
+  font-size: large;
+  color: #045E55;
+  border: .05rem solid #045E55;
+  border-radius: 10rem;
+}
+
+.box-filter-importances button:hover {
+  background-color: #00A79D;
+  color: white;
+}
+
+/*-----------TASK STYLINGS-----------*/
+
 article {
   margin: 1rem auto 2rem auto;
   width: 50%;
@@ -97,27 +144,6 @@ h3 {
   color: #939598;
   padding-left: .5rem;
 }
-
-.importance {
-  font-family: 'Open Sans', sans-serif;
-}
-
-.show-completed,
-.show-more-ToDos {
-  margin: 0 auto;
-  width: 12rem; 
-  background-color: #00A79D;
-  color: #FFFFFF;
-  font-size: 1rem;
-  display: block;
-  position: relative;
-}
-
-.show-completed:hover,
-.show-more-ToDos:hover {
-  background-color: #045E55;
-}
-
 
 article img {
   width: 1.75rem; 
@@ -157,7 +183,8 @@ article img {
   background-color: #E5F3F2; 
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1000px) {
+
 
 form {
   width: 65%;
@@ -171,12 +198,17 @@ form {
   width: 65%;
 }
 
+.box-filter-importances, 
+.box-complete-extra-buttons {
+  width: 65%;
+}
+
 article {
   width: 65%;
 }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
 
 form {
   width: 80%;
@@ -190,27 +222,66 @@ form {
   width: 80%;
 }
 
+.box-filter-importances, 
+.box-complete-extra-buttons {
+  width: 80%;
+}
+
 article {
   width: 80%;
 }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
 
 form {
-  width: 80%;
+  width: 90%;
 }
 
 .save-button {
   font-size: 15px;
 }
 
+.bottom-section {
+  padding: 0 auto;
+}
+
 .filter-input {
-  width: 80%;
+  width: 90%;
+}
+
+.box-complete-extra-buttons {
+  width: 90%;
+  display: block;
+  margin: .5rem auto;
+  height: 4rem;
+}
+
+.show-completed,
+.show-more-ToDos {
+  display: block;
+  width: 100%;
+  height: 48%;
+  margin: .5rem auto;
+}
+
+.box-filter-importances {
+    width: 88%;
+  margin: 1rem auto;
+  height: 2.5rem;
+}
+
+.box-filter-importances button {
+  font-size: medium;
 }
 
 article {
-  width: 80%;
+  width: 90%;
 }
+
+article p {
+  margin: 0;
+}
+
 }
 
