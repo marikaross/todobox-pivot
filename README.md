@@ -33,7 +33,7 @@ MR: I finally feel like my CSS skills are developing.  Definitely not as strong 
 LL: git, GitHub, css, html, js, jQuery, and ‘projects’ in GitHub for synchronicity of the workflow.
 MR: Talking face to face and making lists is great. Lists help make goals and stay on task
 ### How do you want the group to solve problems when members run into issues with features of the project?
-LL: pseudo-code, code, factor, and refactor
-MR: Talk to me!
+  LL: pseudo-code, code, factor, and refactor
+  MR: Talk to me!
 How do you know if a project is successful? How can we achieve that as a group?
 LL: good ole-fashioned hours, patience with ourselves AND one another.
