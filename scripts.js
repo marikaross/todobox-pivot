@@ -7,8 +7,9 @@ $('.bottom-section').on('keydown', '.todo-task-output', editTask);
 $('.bottom-section').on('click', '.upvote-button', increaseImportance);
 $('.bottom-section').on('click', '.downvote-button', decreaseImportance);
 $('.filter-input').on('keyup', filterTasks);
-$('.bottom-section').on('click', '.completed-task', strikeThrough);
+$('.bottom-section').on('click', '.completed-task', changeClassComplete);
 $('.show-completed').on('click', getCompletedTasks);
+$('.show-more-ToDos').on('click', bringEmBack)
 
 
 function btnDisable() {
@@ -148,7 +149,7 @@ function editTask(e) {
     storeTask(parsedCard);
 }
 
-function strikeThrough() {
+function changeClassComplete() {
   $(this).parent('article').toggleClass('card-complete');
   var cardId = $(this).parent().attr('id');
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
@@ -173,6 +174,15 @@ function showTenCards() {
     }
   }
 }
+
+function bringEmBack() {
+    var allTheCards = $('article');
+  // for (var i = 0; i < allTheCards.length; i++) {
+      $(allTheCards).show();
+    // }
+}
+
+
 
 // localStorage is an ar
 // function display( divs ) {
