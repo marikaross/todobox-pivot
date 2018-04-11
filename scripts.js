@@ -7,8 +7,9 @@ $('.bottom-section').on('keydown', '.todo-task-output', editTask);
 $('.bottom-section').on('click', '.upvote-button', increaseImportance);
 $('.bottom-section').on('click', '.downvote-button', decreaseImportance);
 $('.filter-input').on('keyup', filterTasks);
-$('.bottom-section').on('click', '.completed-task', strikeThrough);
+$('.bottom-section').on('click', '.completed-task', changeClassComplete);
 $('.show-completed').on('click', getCompletedTasks);
+$('.show-more-ToDos').on('click', bringEmBack)
 
 
 function btnDisable() {
@@ -24,22 +25,24 @@ function createTask(event) {
   var card = new Card($('.todo-title-input').val(), $('.todo-task-input').val());
   prependTask(card);
   storeTask(card);
+  showTenCards();
   $('.todo-title-input').val('');
   $('.todo-task-input').val('');
 }
 
 function getTasks() {
-  for (var i=0; i < localStorage.length; i++) {
+  for (var i = 0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored);
     if (parsedCard.checked === false) {
       prependTask(parsedCard);
       }
-  }
+  } 
+  showTenCards();
 };
 
 function getCompletedTasks() {
-  for (var i=0; i < localStorage.length; i++) {
+  for (var i = 0; i < localStorage.length; i++) {
     var stored = localStorage.getItem(localStorage.key(i))
     var parsedCard = JSON.parse(stored); 
     if (parsedCard.checked) {
@@ -146,7 +149,7 @@ function editTask(e) {
     storeTask(parsedCard);
 }
 
-function strikeThrough() {
+function changeClassComplete() {
   $(this).parent('article').toggleClass('card-complete');
   var cardId = $(this).parent().attr('id');
   var parsedCard = JSON.parse(localStorage.getItem(cardId));
@@ -163,7 +166,25 @@ function filterTasks() {
 }
 
 
+function showTenCards() {
+  var allTheCards = $('article');
+  for (var i = 0; i < allTheCards.length; i++) {
+    if (i > 9) {
+      $(allTheCards[i]).hide();
+    }
+  }
+}
 
+function bringEmBack() {
+    var allTheCards = $('article');
+  // for (var i = 0; i < allTheCards.length; i++) {
+      $(allTheCards).show();
+    // }
+}
+
+
+
+// localStorage is an ar
 // function display( divs ) {
 //   var a = [];
 //   for ( var i = 0; i < divs.length; i++ ) {
