@@ -13,9 +13,11 @@
     <section class="top-section">
       <header><h1>2Do<span>Box</span></h1></header>
       <form>
-       <input aria-label="enter new to-do title" class="inputs todo-title-input" placeholder="ToDo Title" type="text">
-       <input aria-label="enter new to-do task" class="inputs todo-task-input" placeholder="ToDo Task" type="text">
-       <button aria-label="submit button" class="save-button" type="submit">save</button>
+       <input aria-label="enter new to-do title" class="inputs todo-title-input" placeholder="ToDo Title" type="text" maxlength="120">
+       <h4 class="title-counter">0</h4><h4>/120</h4>
+       <input aria-label="enter new to-do task" class="inputs todo-task-input" placeholder="ToDo Task" type="text" maxlength="120">
+       <h4 class="task-counter">0</h4><h4>/120</h4>
+       <button aria-label="submit button" class="save-button" type="submit" disabled>save</button>
       </form>
     </section>
       <input aria-label="filter current tasks" class="inputs filter-input" placeholder="Filter" type="text">
@@ -23,12 +25,12 @@
         <button class="show-completed" type="submit">Show Completed ToDos</button>
         <button class="show-more-ToDos" type="submit">Show More ToDos</button>
       </aside>
-      <aside aria-label="Box containing buttons to filter ToDos by imporotance" class="box-filter-importances">
-        <button aria-label="filter by no imporotance" class="filter-none-btn" type="submit">None</button>
-        <button aria-label="filter by low imporotance" class="filter-low-btn" type="submit">Low</button>
-        <button aria-label="filter by normal imporotance" class="filter-normal-btn" type="submit">Normal</button>
-        <button aria-label="filter by high imporotance" class="filter-high-btn" type="submit">High</button>
-        <button aria-label="filter by critical imporotance" class="filter-critical-btn" type="submit">Critical</button>
+      <aside aria-label="Box containing buttons to filter ToDos by importance" class="box-filter-importances">
+        <button aria-label="filter by no importance" class="filter-none-btn" type="submit">None</button>
+        <button aria-label="filter by low importance" class="filter-low-btn" type="submit">Low</button>
+        <button aria-label="filter by normal importance" class="filter-normal-btn" type="submit">Normal</button>
+        <button aria-label="filter by high importance" class="filter-high-btn" type="submit">High</button>
+        <button aria-label="filter by critical importance" class="filter-critical-btn" type="submit">Critical</button>
       </aside>
     <section class="bottom-section">
     </section>
