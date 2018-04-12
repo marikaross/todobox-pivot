@@ -15,6 +15,8 @@ $('.filter-low-btn').on('click', filterLow);
 $('.filter-normal-btn').on('click', filterNormal);
 $('.filter-high-btn').on('click', filterHigh);
 $('.filter-critical-btn').on('click', filterCritical);
+$('.todo-title-input').on('keyup', titleCounter);
+$('.todo-task-input').on('keyup', taskCounter);
 
 
 
@@ -32,10 +34,14 @@ function createTask(event) {
   prependTask(card);
   storeTask(card);
   showTenCards();
-  $('.save-button').prop('disabled', true);
+  clearInputs();
+}
+
+  function clearInputs() {
   $('.todo-title-input').val('');
   $('.todo-task-input').val('');
-}
+  $('.save-button').prop('disabled', true);
+};
 
 function getTasks() {
   for (var i = 0; i < localStorage.length; i++) {
@@ -212,8 +218,17 @@ function filterCritical() {
 }
 
 
+function titleCounter() {
+  var titleInput = document.querySelector('.todo-title-input');
+  var titleCharCount = document.querySelector('.title-counter');
+  titleCharCount.innerText = titleInput.value.length;
+}
 
-
+function taskCounter() {
+  var taskInput = document.querySelector('.todo-task-input');
+  var taskCharCount = document.querySelector('.task-counter');
+  taskCharCount.innerText = taskInput.value.length;
+}
 
 
 

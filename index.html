@@ -13,8 +13,10 @@
     <section class="top-section">
       <header><h1>2Do<span>Box</span></h1></header>
       <form>
-       <input aria-label="enter new to-do title" class="inputs todo-title-input" placeholder="ToDo Title" type="text">
-       <input aria-label="enter new to-do task" class="inputs todo-task-input" placeholder="ToDo Task" type="text">
+       <input aria-label="enter new to-do title" class="inputs todo-title-input" placeholder="ToDo Title" type="text" maxlength="120">
+       <h4 class="title-counter">0</h4><h4>/120</h4>
+       <input aria-label="enter new to-do task" class="inputs todo-task-input" placeholder="ToDo Task" type="text" maxlength="120">
+       <h4 class="task-counter">0</h4><h4>/120</h4>
        <button aria-label="submit button" class="save-button" type="submit" disabled>save</button>
       </form>
     </section>
