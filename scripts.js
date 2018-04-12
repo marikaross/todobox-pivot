@@ -9,14 +9,20 @@ $('.bottom-section').on('click', '.downvote-button', decreaseImportance);
 $('.filter-input').on('keyup', filterTasks);
 $('.bottom-section').on('click', '.completed-task', changeClassComplete);
 $('.show-completed').on('click', getCompletedTasks);
-$('.show-more-ToDos').on('click', bringEmBack)
+$('.show-more-ToDos').on('click', showAllCards);
+$('.filter-none-btn').on('click', filterNone);
+$('.filter-low-btn').on('click', filterLow);
+$('.filter-normal-btn').on('click', filterNormal);
+$('.filter-high-btn').on('click', filterHigh);
+$('.filter-critical-btn').on('click', filterCritical);
+
 
 
 function btnDisable() {
-  if ($('.todo-title-input').val() === "" || $('.todo-task-input').val() ==="") {
-    $('.save-button').prop('disabled', true);
-  } else if ($('.todo-title-input').val() && $('.todo-task-input').val()) {
+  if ($('.todo-title-input').val() && $('.todo-task-input').val()) {
     $('.save-button').prop('disabled', false);
+  } else {
+    $('.save-button').prop('disabled', true);
   }
 }
 
@@ -26,6 +32,7 @@ function createTask(event) {
   prependTask(card);
   storeTask(card);
   showTenCards();
+  $('.save-button').prop('disabled', true);
   $('.todo-title-input').val('');
   $('.todo-task-input').val('');
 }
@@ -161,8 +168,6 @@ function changeClassComplete() {
 function filterTasks() {
   $("article:contains('"+ $('.filter-input').val() +"')").show();
   $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
-  $("article:contains('"+ $('.filter-input').val() +"')").show();
-  $("article:not(:contains('"+ $('.filter-input').val() +"'))").hide();
 }
 
 
@@ -175,34 +180,39 @@ function showTenCards() {
   }
 }
 
-function bringEmBack() {
+function showAllCards() {
     var allTheCards = $('article');
-  // for (var i = 0; i < allTheCards.length; i++) {
       $(allTheCards).show();
-    // }
+}
+
+
+function filterNone() {
+  $("article:contains('importance:None')").show();
+  $("article:not(:contains('importance:None'))").hide();
+}
+
+function filterLow() {
+  $("article:contains('importance:Low')").show();
+  $("article:not(:contains('importance:Low'))").hide();
+}
+
+function filterNormal() {
+  $("article:contains('importance:Normal')").show();
+  $("article:not(:contains('importance:Normal'))").hide();
+}
+
+function filterHigh() {
+  $("article:contains('importance:High')").show();
+  $("article:not(:contains('importance:High'))").hide();
+}
+
+function filterCritical() {
+  $("article:contains('importance:Critical')").show();
+  $("article:not(:contains('importance:Critical'))").hide();
 }
 
 
 
-// localStorage is an ar
-// function display( divs ) {
-//   var a = [];
-//   for ( var i = 0; i < divs.length; i++ ) {
-//     a.push( divs[ i ].innerHTML );
-//   }
-//   $( "span" ).text( a.join(" ") );
-// }
-// display( $( "div" ).get().reverse() );
-
-
-
-// if on page load the objectsin storage.lengthis > 10, parse
-// most recent 10 
-
-
-
-// if new card the objects in storage . length is < 10,  parse all
-// if new card the objectsin storage.length is > 10, parse up to 9
 
 
 
